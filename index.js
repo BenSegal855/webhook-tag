@@ -15,7 +15,7 @@ module.exports = class WebTag extends Plugin {
     inject('webhook-tag', MessageTimestamp, 'default', (args, res) => {
       const msg = args[0].message;
 
-      if (msg.webhookId !== null && msg.messageReference === null) {
+      if (msg.webhookId !== null && msg.messageReference === null && msg.author.discriminator === '0000') {
         args[0].message.author.bot = false;
 
         const header = findInReactTree(res, e => Array.isArray(e?.props?.children) && e.props.children.find(c => c?.props?.message));
