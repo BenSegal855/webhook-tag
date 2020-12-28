@@ -3,7 +3,7 @@ const { getModule, React } = require('powercord/webpack');
 const { inject, uninject } = require('powercord/injector');
 const { findInReactTree } = require('powercord/util');
 
-const Tag = require('./Components/Tag');
+const Tag = require('./Components/tag');
 
 module.exports = class WebTag extends Plugin {
   startPlugin () {
