@@ -1,7 +1,7 @@
 {
-    "name": "Webhook Tags",
-    "version": "0.1.1",
-    "description": "Replace bot tags with webhook tags for webhook messages",
-    "author": "Ben855#0855",
-    "license": "MIT"
-  }
+	"name": "Webhook Tags",
+	"version": "0.2.0",
+	"description": "Replace bot tags with webhook tags for webhook messages",
+	"author": "Ben855#0855",
+	"license": "MIT"
+}
