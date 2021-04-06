@@ -2,7 +2,7 @@ const { React } = require('powercord/webpack');
 
 class Tag extends React.PureComponent {
   render () {
-    return <div className={`${this.props.className}`}>WEBHOOK</div>;
+    return <div className={this.props.className}>WEBHOOK</div>;
   }
 }
 

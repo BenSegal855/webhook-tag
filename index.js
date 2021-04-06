@@ -7,18 +7,19 @@ const Tag = require('./Components/tag');
 
 module.exports = class WebTag extends Plugin {
     async startPlugin() {
+		this.loadStylesheet('./style.css');
+
         const MessageTimestamp = getModule(['MessageTimestamp'], false);
         const botTagRegularClasses = getModule(['botTagRegular'], false);
         const botTagClasses = getModule(['botTagCozy'], false);
         const remClasses = getModule(['rem'], false);
 
-        inject('webhook-tag-messages', MessageTimestamp, 'default', (args, res) => {
+		inject('webhook-tag-messages', MessageTimestamp, 'default', (args, res) => {
             const msg = args[0].message;
 
             if (msg.webhookId !== null && msg.messageReference === null && msg.author.discriminator === '0000') {
-                args[0].message.author.bot = false;
-
-                const header = findInReactTree(res, e => Array.isArray(e?.props?.children) && e.props.children.find(c => c?.props?.message));
+				const header = findInReactTree(res, e => Array.isArray(e?.props?.children) && e.props.children.find(c => c?.props?.message));
+                header.props.children[0].props.message.author.bot = false;
                 header.props.children.push(React.createElement(
                     'span',
                     {
@@ -39,16 +40,15 @@ module.exports = class WebTag extends Plugin {
             if (!elements) return res;
 
             const { user } = findInReactTree(elements, p => p.user);
-            if (user.discriminator !== '0000') return res;
-
-            user.bot = false;
+            if (user.discriminator !== '0000' || !user.bot) return res;
 
             elements[1].props.children[1].props.children = [
                 elements[1].props.children[1].props.children,
                 React.createElement(
                     'span',
                     {
-                        className: `${botTagClasses.botTagCozy} ${botTagClasses.botTagCompact} ${botTagRegularClasses.botTagRegular} ${remClasses.rem}`
+                        className: `webhook-tag-pop-out ${botTagClasses.botTagCozy} ${botTagClasses.botTagCompact} ` +
+							`${botTagRegularClasses.botTagRegular} ${remClasses.rem}`
                     },
                     React.createElement(Tag, {
                         className: botTagRegularClasses.botText
