@@ -9,7 +9,10 @@ module.exports = class WebTag extends Plugin {
 	async startPlugin() {
 		this.loadStylesheet('./style.css');
 
-		const MessageTimestamp = getModule(['MessageTimestamp'], false);
+		const MessageTimestamp = getModule([ 'MessageTimestamp' ], false) || getModule(m => (
+			typeof (m?.__powercordOriginal_default || m.default) === 'function' &&
+			(m?.__powercordOriginal_default || m.default).toString().includes('headerText')
+		  ), false);
 		const botTagRegularClasses = getModule(['botTagRegular'], false);
 		const botTagClasses = getModule(['botTagCozy'], false);
 		const remClasses = getModule(['rem'], false);
