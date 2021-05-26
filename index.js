@@ -11,7 +11,7 @@ module.exports = class WebTag extends Plugin {
 
 		const MessageTimestamp = getModule([ 'MessageTimestamp' ], false) || getModule(m => (
 			typeof (m?.__powercordOriginal_default || m.default) === 'function' &&
-			(m?.__powercordOriginal_default || m.default).toString().includes('headerText')
+			(m?.__powercordOriginal_default || m.default).toString().includes('showTimestampOnHover')
 		  ), false);
 		const botTagRegularClasses = getModule(['botTagRegular'], false);
 		const botTagClasses = getModule(['botTagCozy'], false);
