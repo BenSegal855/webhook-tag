@@ -21,7 +21,7 @@ module.exports = class WebTag extends Plugin {
 			const msg = args[0].message;
 
 			if (msg.webhookId !== null && msg.messageReference === null && msg.author.discriminator === '0000') {
-				const header = findInReactTree(res, e => Array.isArray(e?.props?.children) && e.props.children.find(c => c?.props?.message));
+				const header = findInReactTree(res.props.username, e => Array.isArray(e?.props?.children) && e.props.children.find(c => c?.props?.message));
 				header.props.children[0].props.message.author.bot = false;
 				header.props.children.push(React.createElement(
 					'span',
